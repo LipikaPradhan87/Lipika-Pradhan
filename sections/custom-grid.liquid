@@ -9,7 +9,7 @@
         
         {% if product.images %}
           <img 
-            src="{{ product.images | image_url: width: 400 }}" 
+            src="{{ product.show_secondary_image | image_url: width: 400 }}" 
             alt="{{ product.title }}" width="auto" height="auto"
           />
         {% endif %}
