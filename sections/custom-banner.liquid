@@ -1,5 +1,7 @@
  {{ 'custom.css' | asset_url | stylesheet_tag }}
-<section class="banner">
+<section class="banner" style="background-image: url({{ section.settings.bg_image | image_url }}); 
+         background-size: cover; 
+         background-position: center;">
     <div class="banner-content">
         <h1>{{ section.settings.heading }}</h1>
         <p>{{ section.settings.subtext }}</p>
