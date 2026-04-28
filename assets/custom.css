@@ -24,3 +24,16 @@
 .modal.active {
   display: block;
 }
+.banner {
+  background-size: cover;
+  padding: 80px;
+  text-align: center;
+}
+
+.btn {
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
