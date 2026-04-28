@@ -1,13 +1,13 @@
  {{ 'custom.css' | asset_url | stylesheet_tag }}
 <div class="grid">
   {% for i in (1..6) %}
-    <p style="color:blue;">GRID SECTION LOADED</p>
-    {% comment %} {% assign key = "product_" | append: i %} {% endcomment %}
-    {% assign product = section.settings.product_1.title %}
+    <p style="color:blue;">GRID SECTION LOADED {{ section.settings.product_1.title }}</p>
+    {% assign key = "product_" | append: i %}
+    {% assign product = section.settings[key] %}
     
     {% if product %}
       <div class="product-card" data-product='{{ product | json | escape }}'>
-        <p>{{ product }}</p>
+        
         {% if product.featured_media %}
           <img 
             src="{{ product.featured_media | image_url: width: 400 }}" 
