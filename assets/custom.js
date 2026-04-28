@@ -21,7 +21,6 @@ document.querySelectorAll('.product-card').length
   document.getElementById('close-modal').addEventListener('click', function () {
     modal.classList.remove('active');
   });
- addToCart(softWinterVariantId);
 });
 
 function addToCart(variantId) {
