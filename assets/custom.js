@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const cards = document.querySelectorAll('.product-card');
   const modal = document.getElementById('product-modal');
-
+document.querySelectorAll('.product-card').length
   cards.forEach(card => {
     card.addEventListener('click', function () {
 
