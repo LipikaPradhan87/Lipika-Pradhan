@@ -9,7 +9,7 @@
         {% if product.featured_image %}
           <img 
             src="{{ product.featured_image | image_url: width: 400 }}" 
-            alt="{{ product.title }}"
+            alt="{{ product.title }}" width="auto" height="auto"
           />
         {% endif %}
 
