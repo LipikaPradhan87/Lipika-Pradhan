@@ -3,9 +3,10 @@
     {% assign key = "product_" | append: i %}
     {% assign product = section.settings[key] %}
 
-    <h5>product.title</h5>
     
     {% if product %}
+    <h5>product.title</h5>
+
       <div class="product-card" data-product='{{ product | json }}'>
         
         {% if product.images %}
