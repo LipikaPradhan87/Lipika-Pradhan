@@ -6,14 +6,17 @@
     
     {% if product %}
       <div class="product-card" data-product='{{ product | json | escape }}'>
-        
-        {% if product.featured_media %}
+      {% if product.featured_media %}
+        <div class="image-wrapper">
           <img 
             src="{{ product.featured_media | image_url: width: 400 }}" 
             alt="{{ product.title }}" width="auto" height="auto"
           />
-        {% endif %}
 
+          <!-- ✅ PLUS BUTTON -->
+          <button class="open-modal-btn">+</button>
+        </div>
+      {% endif %}
         <h3>{{ product.title }}</h3>
         <p>{{ product.price | money }}</p>
 
