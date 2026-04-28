@@ -38,3 +38,35 @@
 .btn:hover {
   transform: scale(1.05);
 }
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.plus-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  color: black;
+  font-size: 22px;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+/* 🔥 Hover effect */
+.plus-btn:hover {
+  background: black;
+  color: white;
+  transform: scale(1.1);
+}
