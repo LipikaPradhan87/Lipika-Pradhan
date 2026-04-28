@@ -17,9 +17,9 @@
         "img {padding-bottom: 30px;}"
       ],
       "settings": {
-        "heading": "Browse Our Latest Product",
-        "subtext": "",
-        "button_text": "Shop Now",
+        "heading": "Fresh arrivals you need to see!",
+        "subtext": "Step into something new. Explore our newest picks crafted for comfort, style, and confidence.",
+        "button_text": "Shop Now →",
         "bg_image": "shopify://shop_images/images.jpg"
       }
     },
