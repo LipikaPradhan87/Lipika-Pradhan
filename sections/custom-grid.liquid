@@ -1,6 +1,7 @@
  {{ 'custom.css' | asset_url | stylesheet_tag }}
 <div class="grid">
   {% for i in (1..6) %}
+    <p style="color:blue;">GRID SECTION LOADED</p>
     {% assign key = "product_" | append: i %}
     {% assign product = section.settings[key] %}
     
