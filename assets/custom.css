@@ -15,6 +15,7 @@
 }
 .modal {
   display: none;
+  z-index: 999;
 }
 
 .modal.active {
