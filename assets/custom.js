@@ -7,7 +7,8 @@ document.querySelectorAll('.product-card').length
     card.addEventListener('click', function () {
 
       const productData = JSON.parse(this.dataset.product);
-
+       console.log(productData);
+       
       console.log(productData); // debug
 
       document.getElementById('modal-title').innerText = productData.title;
