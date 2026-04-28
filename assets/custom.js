@@ -1,12 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  const cards = document.querySelectorAll('.product-card');
   const modal = document.getElementById('product-modal');
-document.querySelectorAll('.product-card').length
-  cards.forEach(card => {
-    card.addEventListener('click', function () {
 
-      const productData = JSON.parse(this.dataset.product);       
+  document.querySelectorAll('.plus-btn').forEach(btn => {
+
+    btn.addEventListener('click', function (e) {
+
+      e.stopPropagation(); 
+
+      const card = this.closest('.product-card');
+      const productData = JSON.parse(card.dataset.product);
+
       console.log(productData); // debug
 
       document.getElementById('modal-title').innerText = productData.title;
@@ -14,11 +18,13 @@ document.querySelectorAll('.product-card').length
 
       modal.classList.add('active');
     });
+
   });
 
   document.getElementById('close-modal').addEventListener('click', function () {
     modal.classList.remove('active');
   });
+
 });
 
 function addToCart(variantId) {
