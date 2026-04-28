@@ -118,3 +118,34 @@
   color: white;
   transform: scale(1.1);
 }
+.modal-body {
+  display: flex;
+  gap: 20px;
+}
+
+.modal-left img {
+  width: 250px;
+  height: auto;
+}
+
+.modal-right {
+  flex: 1;
+}
+
+#modal-variants {
+  margin: 15px 0;
+}
+
+/* Variant buttons */
+.variant-option {
+  margin: 5px;
+  padding: 6px 10px;
+  border: 1px solid black;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.variant-option.active {
+  background: black;
+  color: white;
+}
