@@ -1,15 +1,14 @@
  {{ 'custom.css' | asset_url | stylesheet_tag }}
 <div class="grid">
   {% for i in (1..6) %}
-    {% assign key = "product_" | append: i %}
-    {% assign product = section.settings[key] %}
+    {% assign products = section.settings %}
     
-    {% if product %}
-      <div class="product-card" data-product='{{ product | json }}'>
+    {% if products %}
+      <div class="product-card" data-product='{{ products | json }}'>
         
-        {% if product.images %}
+        {% if products[0].image %}
           <img 
-            src="{{ product.images | image_url: width: 400 }}" 
+            src="{{ products[0].image | image_url: width: 400 }}" 
             alt="{{ product.title }}" width="auto" height="auto"
           />
         {% endif %}
