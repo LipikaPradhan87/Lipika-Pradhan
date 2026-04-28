@@ -69,34 +69,45 @@ function renderVariants(product) {
       )
     ];
     console.log(values);
-    
     values.forEach(value => {
 
       const btn = document.createElement('button');
       btn.classList.add('variant-option');
 
-      // 🔥 HANDLE COLOR
       if (optionName.toLowerCase() === "color") {
-
         btn.classList.add('color-swatch');
-
-        const colorMap = {
-          black: "#000",
-          white: "#fff",
-          red: "#ff0000",
-          blue: "#0000ff"
-        };
-
-        btn.style.backgroundColor =
-          colorMap[value.toLowerCase()] || value.toLowerCase();
-
+        btn.style.backgroundColor = value.toLowerCase();
         btn.title = value;
-
       } else {
-        // 🔥 SIZE OR OTHER OPTIONS
         btn.innerText = value;
       }
 
+      // ✅ CHECK AVAILABILITY
+      const isAvailable = product.variants.some(v => {
+
+        return product.options.every((opt, i) => {
+
+          const selected = selectedOptions[opt];
+
+          if (opt === optionName) {
+            return v[`option${i+1}`] === value;
+          }
+
+          if (selected) {
+            return v[`option${i+1}`] === selected;
+          }
+
+          return true;
+
+        }) && v.available;
+
+      });
+
+      // ✅ APPLY DISABLE
+      btn.disabled = !isAvailable;
+      btn.classList.toggle('disabled', !isAvailable);
+
+      // ✅ CLICK HANDLER
       btn.onclick = () => {
 
         selectedOptions[optionName] = value;
@@ -105,7 +116,7 @@ function renderVariants(product) {
         btn.classList.add('active');
 
         findVariant(product);
-        updateAvailability(product);
+        updateAvailability(product); // re-check others
       };
 
       wrapper.appendChild(btn);
@@ -113,8 +124,43 @@ function renderVariants(product) {
     container.appendChild(wrapper);
   });
 }
-function updateVariantAvailability(product) {
-  renderVariants(product); 
+function updateAvailability(product) {
+
+  const groups = document.querySelectorAll('.variant-group');
+
+  product.options.forEach((optionName, index) => {
+
+    const buttons = groups[index].querySelectorAll('button');
+
+    buttons.forEach(btn => {
+
+      const value = btn.innerText || btn.title;
+
+      const isAvailable = product.variants.some(v => {
+
+        return product.options.every((opt, i) => {
+
+          const selected = selectedOptions[opt];
+
+          if (opt === optionName) {
+            return v[`option${i+1}`] === value;
+          }
+
+          if (selected) {
+            return v[`option${i+1}`] === selected;
+          }
+
+          return true;
+
+        }) && v.available;
+
+      });
+
+      btn.disabled = !isAvailable;
+      btn.classList.toggle('disabled', !isAvailable);
+
+    });
+  });
 }
 function findVariant(product) {
 
