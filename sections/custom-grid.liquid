@@ -1,8 +1,9 @@
  {{ 'custom.css' | asset_url | stylesheet_tag }}
 <div class="grid">
   {% for i in (1..6) %}
-    {% assign key = "product_" | append: i %}
-    {% assign product = section.settings[key] %}
+  {% assign key = "product_" | append: i %}
+  {% assign product_handle = section.settings[key] %}
+  {% assign product = all_products[product_handle] %}
     
     {% if product %}
       <div class="product-card" data-product='{{ product | json | escape }}'>
