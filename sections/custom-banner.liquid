@@ -1,7 +1,7 @@
  {{ 'custom.css' | asset_url | stylesheet_tag }}
 <section class="banner">
     <div class="banner-content">
-      <p>TEST GRID LOADED</p>
+      {% comment %} <p>TEST GRID LOADED</p> {% endcomment %}
         <h1>{{ section.settings.heading }}</h1>
         <p>{{ section.settings.subtext }}</p>
         <a href="#" class="btn">{{ section.settings.button_text }}</a>
