@@ -32,7 +32,55 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
 });
+function renderVariants(product) {
 
+  const container = document.getElementById('modal-variants');
+  container.innerHTML = "";
+
+  selectedOptions = {};
+
+  product.options.forEach((optionName, index) => {
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<strong>${optionName}</strong>`;
+
+    const values = [...new Set(product.variants.map(v => v[`option${index+1}`]))];
+
+    values.forEach(value => {
+      const btn = document.createElement('button');
+      btn.innerText = value;
+      btn.classList.add('variant-option');
+
+      btn.onclick = () => {
+
+        selectedOptions[optionName] = value;
+
+        // highlight active
+        wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        findVariant(product);
+      };
+
+      wrapper.appendChild(btn);
+    });
+
+    container.appendChild(wrapper);
+  });
+}
+function findVariant(product) {
+
+  const variant = product.variants.find(v => {
+    return product.options.every((opt, i) => {
+      return v[`option${i+1}`] === selectedOptions[opt];
+    });
+  });
+
+  if (variant) {
+    selectedVariantId = variant.id;
+    console.log("Selected Variant:", variant);
+  }
+}
 document.getElementById('add-to-cart').onclick = function () {
 
   if (!selectedVariantId) {
