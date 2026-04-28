@@ -37,9 +37,10 @@ document.getElementById('add-to-cart').onclick = function () {
     return;
   }
 
-  const quantity = document.getElementById('quantity').value;
+const qtyInput = document.getElementById('quantity');
+const quantity = qtyInput ? qtyInput.value : 1;
 
-  addToCart(selectedVariantId, quantity);
+addToCart(selectedVariantId, quantity);
 
   if (selectedOptions["Color"] === "Black" && selectedOptions["Size"] === "M") {
     addToCart(softWinterVariantId, 1);
@@ -81,8 +82,6 @@ function renderVariants(product) {
       } else {
         btn.innerText = value;
       }
-
-      // ✅ CHECK AVAILABILITY
       const isAvailable = product.variants.some(v => {
 
         return product.options.every((opt, i) => {
@@ -92,22 +91,16 @@ function renderVariants(product) {
           if (opt === optionName) {
             return v[`option${i+1}`] === value;
           }
-
           if (selected) {
             return v[`option${i+1}`] === selected;
           }
-
           return true;
-
         }) && v.available;
 
       });
-
-      // ✅ APPLY DISABLE
       btn.disabled = !isAvailable;
       btn.classList.toggle('disabled', !isAvailable);
 
-      // ✅ CLICK HANDLER
       btn.onclick = () => {
 
         selectedOptions[optionName] = value;
@@ -116,7 +109,7 @@ function renderVariants(product) {
         btn.classList.add('active');
 
         findVariant(product);
-        updateAvailability(product); // re-check others
+        updateAvailability(product); 
       };
 
       wrapper.appendChild(btn);
@@ -175,17 +168,32 @@ function findVariant(product) {
     console.log("Selected Variant:", variant);
   }
 }
+function addToCart(variantId, quantity = 1) {
 
-function addToCart(variantId) {
   fetch('/cart/add.js', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
+    credentials: 'same-origin', 
     body: JSON.stringify({
       id: variantId,
-      quantity: 1
+      quantity: Number(quantity)
     })
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Add to cart failed");
+    }
+    return res.json();
+  })
+  .then(data => {
+    console.log("Added to cart:", data);
+
+    alert("Product added to cart!");
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Error adding to cart");
   });
 }
-
