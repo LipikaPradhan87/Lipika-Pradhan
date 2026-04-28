@@ -42,7 +42,7 @@
   color: red;
 }
 .modal-content {
-  /* position: relative; */
+  position: relative;
   background: white;
   padding: 20px;
   width: auto;
