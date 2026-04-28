@@ -30,8 +30,23 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('close-modal').onclick = () => {
     modal.classList.remove('active');
   };
+document.getElementById('add-to-cart').onclick = function () {
 
+  if (!selectedVariantId) {
+    alert("Please select options");
+    return;
+  }
+
+  const quantity = document.getElementById('quantity').value;
+
+  addToCart(selectedVariantId, quantity);
+
+  if (selectedOptions["Color"] === "Black" && selectedOptions["Size"] === "M") {
+    addToCart(softWinterVariantId, 1);
+  }
+};
 });
+
 function renderVariants(product) {
 
   const container = document.getElementById('modal-variants');
@@ -45,37 +60,49 @@ function renderVariants(product) {
     wrapper.innerHTML = `<strong>${optionName}</strong>`;
 
     const values = [...new Set(product.variants.map(v => v[`option${index+1}`]))];
-values.forEach(value => {
+    values.forEach(value => {
 
-  const btn = document.createElement('button');
-  btn.classList.add('variant-option');
+      const btn = document.createElement('button');
+      btn.classList.add('variant-option');
 
-  if (optionName.toLowerCase() === "color") {
-    
-    btn.classList.add('color-swatch');
-    btn.style.backgroundColor = value.toLowerCase();
+      if (optionName.toLowerCase() === "color") {
+        btn.classList.add('color-swatch');
+        btn.style.backgroundColor = value.toLowerCase();
+        btn.title = value;
+      } else {
+        btn.innerText = value;
+      }
 
-    btn.title = value; 
+      const isAvailable = product.variants.some(v => {
+        return product.options.every((opt, i) => {
+          const selected = selectedOptions[opt];
+          const current = (opt === optionName) ? value : selected;
+          return !current || v[`option${i+1}`] === current;
+        }) && v.available;
+      });
 
-  } else {
-    btn.innerText = value; 
-  }
+      if (!isAvailable) {
+        btn.disabled = true;
+        btn.classList.add('disabled');
+      }
 
-  btn.onclick = () => {
+      btn.onclick = () => {
+        selectedOptions[optionName] = value;
 
-    selectedOptions[optionName] = value;
+        wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-    wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+        findVariant(product);
+        updateVariantAvailability(product); 
+      };
 
-    findVariant(product);
-  };
-
-  wrapper.appendChild(btn);
-});
-
+      wrapper.appendChild(btn);
+    });
     container.appendChild(wrapper);
   });
+}
+function updateVariantAvailability(product) {
+  renderVariants(product); 
 }
 function findVariant(product) {
 
@@ -90,6 +117,7 @@ function findVariant(product) {
     console.log("Selected Variant:", variant);
   }
 }
+
 function addToCart(variantId) {
   fetch('/cart/add.js', {
     method: 'POST',
@@ -102,14 +130,4 @@ function addToCart(variantId) {
     })
   });
 }
-document.getElementById('add-to-cart').onclick = function () {
-  if (!selectedVariantId) {
-    alert("Please select options");
-    return;
-  }
 
-  addToCart(selectedVariantId);
-};
-if (selectedOptions["Color"] === "Black" && selectedOptions["Size"] === "M") {
-  addToCart(softWinterVariantId);
-}

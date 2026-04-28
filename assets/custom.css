@@ -162,3 +162,7 @@
   border: 2px solid black;
   transform: scale(1.1);
 }
+.variant-option.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
