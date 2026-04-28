@@ -1,21 +1,22 @@
-
 <div class="grid">
   {% for i in (1..6) %}
     {% assign key = "product_" | append: i %}
-    {% assign product_handle = section.settings[key] %}
-    {% assign product = all_products[product_handle] %}
+    {% assign product = section.settings[key] %}
     
     {% if product %}
-    <div class="product-card" data-product='{{ product | json | escape }}'>
-      {% if product.featured_image %}
-        <img 
-          src="{{ product.featured_image | image_url: width: 400 }}" 
-          alt="{{ product.title }}" width="100px" height="100px"
-        />
-{% endif %}      
-<h3>{{ product.title }}</h3>
-      <p>{{ product.price | money }}</p>
-    </div>
+      <div class="product-card" data-product='{{ product | json | escape }}'>
+        
+        {% if product.featured_image %}
+          <img 
+            src="{{ product.featured_image | image_url: width: 400 }}" 
+            alt="{{ product.title }}"
+          />
+        {% endif %}
+
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price | money }}</p>
+
+      </div>
     {% endif %}
   {% endfor %}
 </div>
