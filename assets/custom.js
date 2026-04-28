@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(productData);
 
       document.getElementById('modal-title').innerText = productData.title;
-      document.getElementById('modal-price').innerText = productData.price / 100 + " Rs";
+      document.getElementById('modal-price').innerText = "$" + productData.price / 100 ;
       document.getElementById('modal-description').innerHTML = productData.description;
 
       document.getElementById('modal-image').src = "https:" + productData.featured_image;
