@@ -1,0 +1,54 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.modal.active {
+  display: block;
+}
+<div class="grid">
+  {% for i in (1..6) %}
+    {% assign key = "product_" | append: i %}
+    {% assign product_handle = section.settings[key] %}
+    {% assign product = all_products[product_handle] %}
+    
+    {% if product %}
+    <div class="product-card" data-product='{{ product | json }}'>
+        <img alt="{{ product.featured_image }}" src="{{ product.src }}" width="100px" height="100px" />
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.price | money }}</p>
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>
+  <div id="product-modal" class="modal hidden">
+    <div class="modal-content">
+        <span id="close-modal">X</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-price"></p>
+        <div id="modal-variants"></div>
+        <button id="add-to-cart">Add to Cart</button>
+    </div>
+  </div>
+{% schema %}
+{
+  "name": "Product Grid",
+  "settings": [
+    { "type": "product", "id": "product_1", "label": "Product 1" },
+    { "type": "product", "id": "product_2", "label": "Product 2" },
+    { "type": "product", "id": "product_3", "label": "Product 3" },
+    { "type": "product", "id": "product_4", "label": "Product 4" },
+    { "type": "product", "id": "product_5", "label": "Product 5" },
+    { "type": "product", "id": "product_6", "label": "Product 6" }
+  ]
+}
+{% endschema %}
