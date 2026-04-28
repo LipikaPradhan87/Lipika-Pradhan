@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.stopPropagation();
 
       const card = this.closest('.product-card');
-      const productData = JSON.parse(card.dataset.product);
+      const productData = JSON.parse(card.dataset);
       console.log(productData);
       
       document.getElementById('modal-title').innerText = productData.title;
