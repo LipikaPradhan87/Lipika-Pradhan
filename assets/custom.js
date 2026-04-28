@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
       e.stopPropagation();
 
       const card = this.closest('.product-card');
-      const productData = JSON.parse(card.dataset);
-      console.log(productData);
+      const productData = JSON.parse(card.dataset.product);
+      console.log(productData,"oooo");
       
       document.getElementById('modal-title').innerText = productData.title;
       document.getElementById('modal-price').innerText = productData.price;
