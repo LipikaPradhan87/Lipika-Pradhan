@@ -11,11 +11,27 @@
   "sections": {
     "banner": {
       "type": "custom-banner",
-      "settings": {}
+      "custom_css": [
+        ".btn {transition: 0.3s; background: whitesmoke; border: 1px solid black; color: black; padding: 5px; box-shadow: 1px 1px 2px 1px; text-decoration: none;}",
+        ".btn:hover {transform: scale(1.05);}"
+      ],
+      "settings": {
+        "heading": "Browse Our Latest Products",
+        "subtext": "",
+        "button_text": "Shop all",
+        "bg_image": "shopify://shop_images/shop-clothing-item.png"
+      }
     },
     "grid": {
       "type": "custom-grid",
-      "settings": {}
+      "settings": {
+        "product_1": "black-leather-bag",
+        "product_2": "chequered-red-shirt",
+        "product_3": "dark-denim-top",
+        "product_4": "classic-varsity-top",
+        "product_5": "floral-white-top",
+        "product_6": "blue-silk-tuxedo"
+      }
     }
   },
   "order": [
