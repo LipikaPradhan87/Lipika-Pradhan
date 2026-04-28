@@ -68,6 +68,8 @@ function renderVariants(product) {
           .filter(Boolean)
       )
     ];
+    console.log(values);
+    
     values.forEach(value => {
 
       const btn = document.createElement('button');
