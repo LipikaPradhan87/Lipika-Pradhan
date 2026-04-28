@@ -52,14 +52,17 @@ function renderVariants(product) {
   const container = document.getElementById('modal-variants');
   container.innerHTML = "";
 
-  selectedOptions = {};
-
   product.options.forEach((optionName, index) => {
 
     const wrapper = document.createElement('div');
-    wrapper.innerHTML = `<strong>${optionName}</strong>`;
+    wrapper.classList.add('variant-group');
 
-    const values = [...new Set(product.variants.map(v => v[`option${index+1}`]))];
+    const label = document.createElement('strong');
+    label.innerText = optionName;
+    wrapper.appendChild(label);
+
+    const values = [...new Set(product.variants.map(v => v[`option${index + 1}`]))];
+
     values.forEach(value => {
 
       const btn = document.createElement('button');
@@ -67,37 +70,26 @@ function renderVariants(product) {
 
       if (optionName.toLowerCase() === "color") {
         btn.classList.add('color-swatch');
-        btn.style.backgroundColor = value.toLowerCase();
+        btn.style.backgroundColor = value.toLowerCase(); 
         btn.title = value;
       } else {
         btn.innerText = value;
       }
 
-      const isAvailable = product.variants.some(v => {
-        return product.options.every((opt, i) => {
-          const selected = selectedOptions[opt];
-          const current = (opt === optionName) ? value : selected;
-          return !current || v[`option${i+1}`] === current;
-        }) && v.available;
-      });
-
-      if (!isAvailable) {
-        btn.disabled = true;
-        btn.classList.add('disabled');
-      }
-
       btn.onclick = () => {
+
         selectedOptions[optionName] = value;
 
         wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         findVariant(product);
-        updateVariantAvailability(product); 
+        updateAvailability(product);
       };
 
       wrapper.appendChild(btn);
     });
+
     container.appendChild(wrapper);
   });
 }
