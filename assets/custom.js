@@ -90,18 +90,6 @@ function findVariant(product) {
     console.log("Selected Variant:", variant);
   }
 }
-
-document.getElementById('add-to-cart').onclick = function () {
-  if (!selectedVariantId) {
-    alert("Please select options");
-    return;
-  }
-
-  addToCart(selectedVariantId);
-};
-if (selectedOptions["Color"] === "Black" && selectedOptions["Size"] === "M") {
-  addToCart(softWinterVariantId);
-}
 function addToCart(variantId) {
   fetch('/cart/add.js', {
     method: 'POST',
@@ -113,4 +101,15 @@ function addToCart(variantId) {
       quantity: 1
     })
   });
+}
+document.getElementById('add-to-cart').onclick = function () {
+  if (!selectedVariantId) {
+    alert("Please select options");
+    return;
+  }
+
+  addToCart(selectedVariantId);
+};
+if (selectedOptions["Color"] === "Black" && selectedOptions["Size"] === "M") {
+  addToCart(softWinterVariantId);
 }
