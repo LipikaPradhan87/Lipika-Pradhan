@@ -10,9 +10,10 @@
       {% if product.featured_image %}
         <img 
           src="{{ product.featured_image | image_url: width: 400 }}" 
-          alt="{{ product.title }}" 
+          alt="{{ product.title }}" width="100px" height="100px"
         />
-{% endif %}      <h3>{{ product.title }}</h3>
+{% endif %}      
+<h3>{{ product.title }}</h3>
       <p>{{ product.price | money }}</p>
     </div>
     {% endif %}
