@@ -45,25 +45,34 @@ function renderVariants(product) {
     wrapper.innerHTML = `<strong>${optionName}</strong>`;
 
     const values = [...new Set(product.variants.map(v => v[`option${index+1}`]))];
+values.forEach(value => {
 
-    values.forEach(value => {
-      const btn = document.createElement('button');
-      btn.innerText = value;
-      btn.classList.add('variant-option');
+  const btn = document.createElement('button');
+  btn.classList.add('variant-option');
 
-      btn.onclick = () => {
+  if (optionName.toLowerCase() === "color") {
+    
+    btn.classList.add('color-swatch');
+    btn.style.backgroundColor = value.toLowerCase();
 
-        selectedOptions[optionName] = value;
+    btn.title = value; 
 
-        // highlight active
-        wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+  } else {
+    btn.innerText = value; 
+  }
 
-        findVariant(product);
-      };
+  btn.onclick = () => {
 
-      wrapper.appendChild(btn);
-    });
+    selectedOptions[optionName] = value;
+
+    wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    findVariant(product);
+  };
+
+  wrapper.appendChild(btn);
+});
 
     container.appendChild(wrapper);
   });
