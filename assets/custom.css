@@ -84,6 +84,9 @@
   transform: translateY(-3px) scale(1.03);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
+.btn:hover::after{
+  color: white;
+}
 
 .btn:hover::before {
   width: 100%;
