@@ -63,33 +63,41 @@ function renderVariants(product) {
 
     const values = [...new Set(product.variants.map(v => v[`option${index + 1}`]))];
 
-    values.forEach(value => {
+values.forEach(value => {
 
-      const btn = document.createElement('button');
-      btn.classList.add('variant-option');
+  const btn = document.createElement('button');
+  btn.classList.add('variant-option');
 
-      if (optionName.toLowerCase() === "color") {
-        btn.classList.add('color-swatch');
-        btn.style.backgroundColor = value.toLowerCase(); 
-        btn.title = value;
-      } else {
-        btn.innerText = value;
-      }
+  if (optionName.toLowerCase() === "color") {
 
-      btn.onclick = () => {
+    btn.classList.add('color-swatch');
 
-        selectedOptions[optionName] = value;
+    const colorMap = {
+      black: "#000",
+      white: "#fff",
+      red: "#ff0000",
+      blue: "#0000ff"
+    };
 
-        wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    btn.style.backgroundColor = colorMap[value.toLowerCase()] || value.toLowerCase();
+    btn.title = value;
 
-        findVariant(product);
-        updateAvailability(product);
-      };
+  } else {
+    btn.innerText = value;
+  }
 
-      wrapper.appendChild(btn);
-    });
+  btn.onclick = () => {
+    selectedOptions[optionName] = value;
 
+    wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    findVariant(product);
+    updateAvailability(product);
+  };
+
+  wrapper.appendChild(btn);
+});
     container.appendChild(wrapper);
   });
 }
