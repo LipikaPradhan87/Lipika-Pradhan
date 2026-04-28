@@ -7,9 +7,9 @@
     {% if product %}
       <div class="product-card" data-product='{{ product | json }}'>
         
-        {% if product.featured_image %}
+        {% if product.featured_media %}
           <img 
-            src="{{ product.featured_image | image_url: width: 400 }}" 
+            src="{{ product.featured_media | image_url: width: 400 }}" 
             alt="{{ product.title }}" width="auto" height="auto"
           />
         {% endif %}
