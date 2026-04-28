@@ -9,16 +9,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const card = this.closest('.product-card');
       const productData = JSON.parse(card.dataset.product);
-
+      console.log(productData);
+      
       document.getElementById('modal-title').innerText = productData.title;
       document.getElementById('modal-price').innerText = productData.price;
 
-      modal.classList.add('active'); // ✅ show modal
+      modal.classList.add('active'); 
     });
   });
 
   document.getElementById('close-modal').addEventListener('click', function () {
-    modal.classList.remove('active'); // ✅ hide modal
+    modal.classList.remove('active'); 
   });
 
 });
