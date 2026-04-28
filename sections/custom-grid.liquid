@@ -1,5 +1,4 @@
 <div class="grid">
-  {% for i in (1..6) %}
     {% assign key = "product_" | append: i %}
     {% assign product = section.settings[key] %}
     
@@ -18,7 +17,6 @@
 
       </div>
     {% endif %}
-  {% endfor %}
 </div>
   <div id="product-modal" class="modal hidden">
     <div class="modal-content">
