@@ -90,8 +90,8 @@ function findVariant(product) {
     console.log("Selected Variant:", variant);
   }
 }
-document.getElementById('add-to-cart').onclick = function () {
 
+document.getElementById('add-to-cart').onclick = function () {
   if (!selectedVariantId) {
     alert("Please select options");
     return;
@@ -101,4 +101,16 @@ document.getElementById('add-to-cart').onclick = function () {
 };
 if (selectedOptions["Color"] === "Black" && selectedOptions["Size"] === "M") {
   addToCart(softWinterVariantId);
+}
+function addToCart(variantId) {
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: variantId,
+      quantity: 1
+    })
+  });
 }
