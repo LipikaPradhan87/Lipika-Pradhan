@@ -42,6 +42,7 @@
         ".btn:hover {transform: scale(1.05);}"
       ],
       "settings": {
+        "image": "shopify://shop_images/woman-outside-brownstone_925x_e294dd41-e6c3-4e3c-b89d-752a01026a87.jpg",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "image_behavior": "none",
