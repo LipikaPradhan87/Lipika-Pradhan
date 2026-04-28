@@ -61,43 +61,53 @@ function renderVariants(product) {
     label.innerText = optionName;
     wrapper.appendChild(label);
 
-    const values = [...new Set(product.variants.map(v => v[`option${index + 1}`]))];
+    const values = [
+      ...new Set(
+        product.variants
+          .map(v => v[`option${index + 1}`])
+          .filter(Boolean)
+      )
+    ];
+    values.forEach(value => {
 
-values.forEach(value => {
+      const btn = document.createElement('button');
+      btn.classList.add('variant-option');
 
-  const btn = document.createElement('button');
-  btn.classList.add('variant-option');
+      // 🔥 HANDLE COLOR
+      if (optionName.toLowerCase() === "color") {
 
-  if (optionName.toLowerCase() === "color") {
+        btn.classList.add('color-swatch');
 
-    btn.classList.add('color-swatch');
+        const colorMap = {
+          black: "#000",
+          white: "#fff",
+          red: "#ff0000",
+          blue: "#0000ff"
+        };
 
-    const colorMap = {
-      black: "#000",
-      white: "#fff",
-      red: "#ff0000",
-      blue: "#0000ff"
-    };
+        btn.style.backgroundColor =
+          colorMap[value.toLowerCase()] || value.toLowerCase();
 
-    btn.style.backgroundColor = colorMap[value.toLowerCase()] || value.toLowerCase();
-    btn.title = value;
+        btn.title = value;
 
-  } else {
-    btn.innerText = value;
-  }
+      } else {
+        // 🔥 SIZE OR OTHER OPTIONS
+        btn.innerText = value;
+      }
 
-  btn.onclick = () => {
-    selectedOptions[optionName] = value;
+      btn.onclick = () => {
 
-    wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+        selectedOptions[optionName] = value;
 
-    findVariant(product);
-    updateAvailability(product);
-  };
+        wrapper.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-  wrapper.appendChild(btn);
-});
+        findVariant(product);
+        updateAvailability(product);
+      };
+
+      wrapper.appendChild(btn);
+    });
     container.appendChild(wrapper);
   });
 }
