@@ -6,6 +6,7 @@
   {% assign product = all_products[product_handle] %}
     
     {% if product %}
+      
       <div class="product-card" data-product='{{ product | json | escape }}'>
       {% if product.featured_media %}
         <div class="image-wrapper">
