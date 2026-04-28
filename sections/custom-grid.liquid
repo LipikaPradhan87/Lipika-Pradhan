@@ -1,9 +1,6 @@
 <div class="grid">
     {% assign key = "product_" | append: i %}
-    {% assign product = section.settings[key] %}
-
-    <h5>product.title</h5>
-    
+    {% assign product = section.settings[key] %}    
     {% if product %}
       <div class="product-card" data-product='{{ product | json }}'>
         
