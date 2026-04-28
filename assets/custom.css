@@ -52,13 +52,41 @@
   padding: 80px;
   text-align: center;
 }
-
 .btn {
-  transition: 0.3s;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background: transparent;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 0%;
+  height: 100%;
+  background: black;
+
+  z-index: -1;
+  transition: width 0.3s ease;
 }
 
 .btn:hover {
-  transform: scale(1.05);
+  color: white;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover::before {
+  width: 100%;
 }
 .image-wrapper {
   position: relative;
