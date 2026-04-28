@@ -1,3 +1,6 @@
+let selectedVariantId = null;
+let selectedOptions = {};
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const modal = document.getElementById('product-modal');
@@ -9,33 +12,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const card = this.closest('.product-card');
       const productData = JSON.parse(card.dataset.product);
-      console.log(productData,"oooo");
-      
-      document.getElementById('modal-title').innerText = productData.title;
-      document.getElementById('modal-price').innerText = productData.price;
 
-      modal.classList.add('active'); 
+      console.log(productData);
+
+      document.getElementById('modal-title').innerText = productData.title;
+      document.getElementById('modal-price').innerText = productData.price / 100 + " Rs";
+      document.getElementById('modal-description').innerHTML = productData.description;
+
+      document.getElementById('modal-image').src = "https:" + productData.featured_image;
+
+      renderVariants(productData);
+
+      modal.classList.add('active');
     });
   });
 
-  document.getElementById('close-modal').addEventListener('click', function () {
-    modal.classList.remove('active'); 
-  });
+  document.getElementById('close-modal').onclick = () => {
+    modal.classList.remove('active');
+  };
 
 });
 
-function addToCart(variantId) {
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id: variantId,
-      quantity: 1
-    })
-  });
+document.getElementById('add-to-cart').onclick = function () {
+
+  if (!selectedVariantId) {
+    alert("Please select options");
+    return;
+  }
+
+  addToCart(selectedVariantId);
+};
+if (selectedOptions["Color"] === "Black" && selectedOptions["Size"] === "M") {
+  addToCart(softWinterVariantId);
 }
-// if(color === 'Black' && size === 'Medium') {
-//   addToCart(softWinterVariantId);
-// }
