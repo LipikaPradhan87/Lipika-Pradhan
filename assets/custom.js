@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const productData = JSON.parse(this.dataset.product);
 
+      console.log(productData); // debug
+
       document.getElementById('modal-title').innerText = productData.title;
       document.getElementById('modal-price').innerText = productData.price;
 
@@ -18,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('close-modal').addEventListener('click', function () {
     modal.classList.remove('active');
   });
-
+ addToCart(softWinterVariantId);
 });
 
 function addToCart(variantId) {
@@ -33,6 +35,6 @@ function addToCart(variantId) {
     })
   });
 }
-if(color === 'Black' && size === 'Medium') {
-  addToCart(softWinterVariantId);
-}
+// if(color === 'Black' && size === 'Medium') {
+//   addToCart(softWinterVariantId);
+// }
