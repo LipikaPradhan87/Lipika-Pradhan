@@ -5,7 +5,7 @@
     {% assign product = section.settings[key] %}
     
     {% if product %}
-      <div class="product-card" data-product='{{ product | json }}'>
+      <div class="product-card" data-product='{{ product | json | escape }}'>
         
         {% if product.featured_media %}
           <img 
