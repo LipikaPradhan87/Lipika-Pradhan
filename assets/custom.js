@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const productData = JSON.parse(this.dataset.product);
 
   const cards = document.querySelectorAll('.product-card');
   const modal = document.getElementById('product-modal');
 document.querySelectorAll('.product-card').length
   cards.forEach(card => {
-    card.addEventListener('click', function () {       
+    card.addEventListener('click', function () {
+
+      const productData = JSON.parse(this.dataset.product);
+       console.log(productData);
+       
       console.log(productData); // debug
 
       document.getElementById('modal-title').innerText = productData.title;
