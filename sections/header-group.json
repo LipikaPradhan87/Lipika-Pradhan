@@ -13,18 +13,6 @@
   "sections": {
     "announcement_bar_dTW33B": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement_DYbLrE": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement_DYbLrE"
-      ],
       "name": "t:sections.announcement-bar.presets.name",
       "settings": {
         "auto_rotate": false,

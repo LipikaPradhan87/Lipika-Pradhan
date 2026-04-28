@@ -25,6 +25,9 @@
     },
     "grid": {
       "type": "custom-grid",
+      "custom_css": [
+        "@media (max-width: 768px) {.grid {grid-template-columns: repeat(2, 1fr); gap:10px; } .banner {padding: 40px; }}"
+      ],
       "settings": {
         "product_1": "black-leather-bag",
         "product_2": "chequered-red-shirt",
