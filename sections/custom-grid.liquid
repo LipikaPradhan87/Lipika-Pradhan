@@ -7,8 +7,12 @@
     
     {% if product %}
     <div class="product-card" data-product='{{ product | json | escape }}'>
-        <img src="{{ product.featured_image | image_url: width: 400 }}"  alt="{{ product.title }}" width="100px" height="100px" />
-      <h3>{{ product.title }}</h3>
+      {% if product.featured_image %}
+        <img 
+          src="{{ product.featured_image | image_url: width: 400 }}" 
+          alt="{{ product.title }}" 
+        />
+{% endif %}      <h3>{{ product.title }}</h3>
       <p>{{ product.price | money }}</p>
     </div>
     {% endif %}
